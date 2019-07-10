@@ -26,54 +26,44 @@ var selectableSongs = ["california love",
             "fighting love",
             "bullying"];
             
-var letters = (abcdefghijklmnopqrstuvwxyz); //don't need to separate the letters
-
 var winCount = 0;
 var guessLeft = 9;
 var currentSongIndex; //Index of current song in the array
 var guessedLetters = [];
-var guessingSong; //Song user is trying to guess (to match curret song index)
+var guessingSong = []; //Song user is trying to guess (to match current song index)
+var remainingLetters; //Keep track of how many letters left to be guessed --> //|| Check for win
+
 var gameStarted = false; //flag to tell game has started
-var gamefinished = false; //flag to 'press any key to start again!'
+var gameFinished = false; //flag to 'press any key to start again!'
 
 
-//function to capture user's keyboard input
-document.onkeyup = function (even) {
-    var userInput = event.key;
-    console.log (userInput);
-
-    guessedLetters.push(userInput);
-    guessLeft--;
-    updateDisplay();
-
-    for (var i=0; i<selectableSongs[currentSongIndex].length; i++) {
-        if (guessedLetters.includes(currentSongIndex[i])) {
-            guessingSong += guessedLetters;
-        } else {
-            guessingSong += "_";
-        }
-    }
-    document.querySelector(".currentWord").innerText = guessingSong;
-}
-
-
+reset();
 
 //function to set variables when restart the game
 function reset() {
     guessLeft = 9;
     guessedLetters = [];
+    guessingSong = [];
     gameStarted = false;
-    updateDisplay;
 
     //Computer picks random song index and log in console
-    currentSongIndex= [Math.floor(Math.random()*songs.length)];
+    currentSongIndex = selectableSongs[Math.floor(Math.random()*selectableSongs.length)];
     console.log("Current song to guess: " + currentSongIndex);
 
-    for (var i=0; i<selectableSongs[currentSongIndex].length; i++) {
+    for (var i=0; i<currentSongIndex.length; i++) {
         guessingSong.push("_");
     }
-}
+    //Keep track of how many letters left to guess
+    remainingLetters = currentSongIndex.length; 
+    
+    //Hide gameover and win image
+    document.querySelector("#gameover-image").style.display = "none";
+    document.querySelector("#pressKeyTryAgain").style.display = "none";
 
+    //update HTML display
+    updateDisplay();
+
+}
 
 //? innerText vs. innerHTML
     //*innerText sets content of tag as plain text, ignore HTML format
@@ -82,11 +72,50 @@ function reset() {
 //function to update display on HTML page
 function updateDisplay(){
     document.querySelector(".totalWins").innerText = winCount;
-    
+
+    document.querySelector(".currentSong").innerHTML = "";
     for (var i=0; i<guessingSong.length; i++){
-        document.querySelector(".currentWord").innerText += guessingSong[i];
+        document.querySelector(".currentSong").innerHTML += guessingSong[i];
     }
-    document.querySelector(".remainingguesses").innerText = guessLeft;
-    document.querySelector(".guessedletters").innerText = guessedLetters;
+
+    document.querySelector(".remainingGuesses").innerHTML = guessLeft;
+    document.querySelector(".guessedLetters").innerHTML = guessedLetters;
     
+    //check for lose, if true then ask user to press any key
+    if (guessLeft == 0){
+        gameFinished = true;
+        document.querySelector("#gameover-image").style.display = "block";
+        document.querySelector("#pressKeyTryAgain").style.display = "block";
+    }
+
+
+//function to capture user's keyboard input
+document.onkeyup = function (even) {
+    var userInput = event.key;
+    console.log (userInput);
+
+
+    //check if the game has finished
+    if (gameFinished) {
+         reset();
+         gameFinished = false;
+    } else {
+        //Check to make sure a-z was pressed
+        if(event.keyCode >= 65 && event.keyCode <= 90){
+            event.key.toLowerCase();
+        }
+    }
+
+    for (var i=0; i<currentSongIndex.length; i++) {
+        if (guessedLetters.includes(currentSongIndex[i])) {
+            guessingSong[i] += guessedLetters;
+        } else {
+            guessingSong[i] += "_";
+        }
+    }
+    guessedLetters.push(userInput);
+    guessLeft--;
+    updateDisplay();
+}
+
 }
