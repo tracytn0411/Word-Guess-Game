@@ -1,57 +1,57 @@
-
-
-var selectableSongs = ["california love",
-            "i swear",
-            "poker face",
-            "dreidel dreidel dreidel",
-            "what what",
-            "lonely jew",
-            "boom boom pow","unfulfill",
-            "give life a try",
-            "put it down",
-            "do what you gonna do",
+var selectableSongs = [
+            "californialove",
+            "iswear",
+            "pokerface",
+            "whatwhat",
+            "lonelyjew",
+            "boomboompow",
+            "unfulfill",
+            "putitdown",
+            "schoolmusical",
             "waterpark",
-            "heat of the moment",
             "fingerbang",
-            "where do i begin",
-            "faith hilling",
-            "sixteen tons",
-            "everyone is special",
-            "fighting love",
+            "wrestler",
+            "sixteentons",
+            "fightinglove",
             "bullying"];
             
 var winCount = 0;
-var guessLeft = 9;
-var currentSongIndex; //Index of current song in the array
+var guessLeft = 9; //Check for lose
+var currentSongIndex; //Index of current song in selectableSongs list
 var guessedLetters = [];
-var guessingSong = ""; //Song user is trying to guess (to match current song index)
+var answerArray = []; //Song user is trying to guess (to match current song index)
 var remainingLetters; //Keep track of how many letters left to be guess --> //|| Check for win
 
-var gameStarted = false; //flag to tell game has started
 var gameFinished = false; //flag to 'press any key to start again!'
+var gameStarted = false;
 
 
 reset();
 
-//function to set variables when restart the game
+//Function to set variables when start/restart the game
 function reset() {
     guessLeft = 9;
     guessedLetters = [];
-    guessingSong = "";
-    gameStarted = false;
+    gameStarted = false; //?Maybe don't need this
 
     //Computer picks random song index for user to guess
     currentSongIndex = selectableSongs[Math.floor(Math.random()*selectableSongs.length)];
     console.log("Current song to guess: " + currentSongIndex);
 
+    //Create an empty array and fill with "_" to match the numbers of letters in the song
+    answerArray = [];
+    for (var i=0; i<currentSongIndex.length; i++){
+            answerArray[i] = "_ "; //add space after underscore to separate the letters on display
+    }
     //Keep track of how many letters left to guess --> //|| Check for win
     remainingLetters = currentSongIndex.length; 
     
     //Hide gameover and win image
     document.querySelector("#gameover-image").style.display = "none";
     document.querySelector("#pressKeyTryAgain").style.display = "none";
+    document.querySelector("#youwin-image").style.display = "none";
 
-    //update HTML display
+    //Update HTML display
     updateDisplay();
 }
 
@@ -59,7 +59,7 @@ function reset() {
 //function to update display on HTML page
 function updateDisplay(){
     document.querySelector(".totalWins").innerText = winCount;
-    document.querySelector(".currentSong").innerText = guessingSong;
+    document.querySelector(".currentSong").innerText = answerArray.join("");
     document.querySelector(".remainingGuesses").innerHTML = guessLeft;
     document.querySelector(".guessedLetters").innerHTML = guessedLetters;
 }
@@ -93,8 +93,8 @@ function incorrectGuess(userInput){
         guessedLetters.push(userInput);
         guessLeft--;
         updateDisplay();
-        if (guessLeft == 0){
-            //If guessLeft is 0, user loses
+        if (guessLeft === 0){
+            //If guessLeft is 0, user loses, game is finished
             document.querySelector("#gameover-image").style.display = "block";
             document.querySelector("#pressKeyTryAgain").style.display = "block";
             gameFinished = true;
@@ -105,16 +105,20 @@ function incorrectGuess(userInput){
 
 //evaluate correct guess
 function correctGuess(userInput){
-    if (guessingSong.indexOf(userInput) < 0){
-    for (var i=0; i<currentSongIndex.length; i++){
-        if (userInput.includes(currentSongIndex[i])) {
-            guessingSong += currentSongIndex[i];
+    //If the correct pressed key has NOT been added to the answerArray, add it.
+    if (answerArray.indexOf(userInput) < 0){
+    for (var j=0; j<currentSongIndex.length; j++){
+        if (currentSongIndex[j] === userInput) {
+            answerArray[j] = userInput;
             updateDisplay();
-            remainingLetters--;
-            if (remainingLetters == 0){
+            remainingLetters--; //check for win
+            if (remainingLetters === 0){
+                //User wins, game is finished
+                winCount++;
                 document.querySelector("#youwin-image").style.display = "block";
                 document.querySelector("#pressKeyTryAgain").style.display = "block";
                 gameFinished = true;
+                updateDisplay();
             }
         }
     }
