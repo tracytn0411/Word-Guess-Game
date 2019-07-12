@@ -16,8 +16,6 @@ var answerArray = []; //Song user is trying to guess (to match current song inde
 var remainingLetters; //Keep track of how many letters left to be guess --> //|| Check for win
 
 var gameFinished = false; //flag to 'press any key to start again!'
-var gameStarted = false;
-
 
 reset();
 
@@ -25,7 +23,6 @@ reset();
 function reset() {
     guessLeft = 9;
     guessedLetters = [];
-    gameStarted = false; //?Maybe don't need this
 
     //Generate a random song index for user to guess
     currentSongIndex = selectableSongs[Math.floor(Math.random()*selectableSongs.length)];
@@ -51,19 +48,30 @@ function reset() {
     document.querySelector("#try").style.display = "none";
     document.querySelector("#wrestler").style.display = "none";
     document.querySelector("#bullying").style.display = "none";
-    
+ 
+    //Stop all videos from playing with currentTime and pause()
+    //!There should be a better way to do this
+    document.querySelector("#iswear").currentTime = 0; 
+    document.querySelector("#pokerFace").currentTime = 0; 
+    document.querySelector("#boomPow").currentTime = 0; 
+    document.querySelector("#putItDown").currentTime = 0; 
+    document.querySelector("#try").currentTime = 0; 
+    document.querySelector("#wrestler").currentTime = 0; 
+    document.querySelector("#bullying").currentTime = 0; 
 
+        document.querySelector("#iswear").pause(); 
+        document.querySelector("#pokerFace").pause(); 
+        document.querySelector("#boomPow").pause(); 
+        document.querySelector("#putItDown").pause(); 
+        document.querySelector("#try").pause(); 
+        document.querySelector("#wrestler").pause(); 
+        document.querySelector("#bullying").pause(); 
+    
     //Update HTML display
     updateDisplay();
-
-   
-    
 }
 
-// function play () {
-//     var themeSong = document.querySelector("#themeSP");
-//     themeSong.play();
-// }
+
 //function to update display on HTML page
 function updateDisplay(){
     document.querySelector(".totalWins").innerText = winCount;
@@ -123,7 +131,7 @@ function correctGuess(userInput){
             updateDisplay();
             remainingLetters--; //check for win
             if (remainingLetters === 0){
-                
+                //User wins, play the related video and update display on html
                 if (selectableSongs[0] === currentSongIndex){
             document.querySelector("#iSwear").style.display = "block";
             document.querySelector("#iSwear").play();
@@ -131,8 +139,8 @@ function correctGuess(userInput){
             document.querySelector("#pokerFace").style.display = "block";
             document.querySelector("#pokerFace").play();
                 } else if (selectableSongs[2] === currentSongIndex){
-            document.querySelector("boomPow").style.display = "block";
-            document.querySelector("boomPow").play();
+            document.querySelector("#boomPow").style.display = "block";
+            document.querySelector("#boomPow").play();
                 } else if (selectableSongs[3] === currentSongIndex){
             document.querySelector("#putItDown").style.display = "block";
             document.querySelector("#putItDown").play();
@@ -157,4 +165,3 @@ function correctGuess(userInput){
 }
 }
 
-//Play video that matches the index song after user wins

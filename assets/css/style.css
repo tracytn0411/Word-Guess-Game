@@ -14,14 +14,18 @@ section {
     width: 70%;
 }
 
-h2, h4 {
+h2 {
     padding: 5px;
     background-color: rgba(101,155,242,.2);
 }
-#title-image, #gameover-image, #youwin-image { 
-    display: block;
-    margin: 0 auto;
+
+h4 {margin-top: 40px;
 }
+.songList, .pressKey {
+    margin-top: 10%;
+    width: 100%;
+}
+
 
 #currentWord {
     letter-spacing: 10px;
