@@ -1,19 +1,12 @@
 var selectableSongs = [
-            "californialove",
-            "iswear",
-            "pokerface",
-            "whatwhat",
-            "lonelyjew",
-            "boomboompow",
-            "unfulfill",
-            "putitdown",
-            "schoolmusical",
-            "waterpark",
-            "fingerbang",
-            "wrestler",
-            "sixteentons",
-            "fightinglove",
-            "bullying"];
+    "iswear", 
+    "pokerface",
+    "boomboompow", 
+    "putitdown",
+    "try",  
+    "wrestler", 
+    "bullying", 
+        ];
             
 var winCount = 0;
 var guessLeft = 9; //Check for lose
@@ -34,7 +27,7 @@ function reset() {
     guessedLetters = [];
     gameStarted = false; //?Maybe don't need this
 
-    //Computer picks random song index for user to guess
+    //Generate a random song index for user to guess
     currentSongIndex = selectableSongs[Math.floor(Math.random()*selectableSongs.length)];
     console.log("Current song to guess: " + currentSongIndex);
 
@@ -49,13 +42,28 @@ function reset() {
     //Hide gameover and win image
     document.querySelector("#gameover-image").style.display = "none";
     document.querySelector("#pressKeyTryAgain").style.display = "none";
-    document.querySelector("#youwin-image").style.display = "none";
+
+    //Hide all song videos
+    document.querySelector("#iSwear").style.display = "none";
+    document.querySelector("#pokerFace").style.display = "none";
+    document.querySelector("#boomPow").style.display = "none";
+    document.querySelector("#putItDown").style.display = "none";
+    document.querySelector("#try").style.display = "none";
+    document.querySelector("#wrestler").style.display = "none";
+    document.querySelector("#bullying").style.display = "none";
+    
 
     //Update HTML display
     updateDisplay();
+
+   
+    
 }
 
-
+// function play () {
+//     var themeSong = document.querySelector("#themeSP");
+//     themeSong.play();
+// }
 //function to update display on HTML page
 function updateDisplay(){
     document.querySelector(".totalWins").innerText = winCount;
@@ -97,13 +105,15 @@ function incorrectGuess(userInput){
             //If guessLeft is 0, user loses, game is finished
             document.querySelector("#gameover-image").style.display = "block";
             document.querySelector("#pressKeyTryAgain").style.display = "block";
+            
+
             gameFinished = true;
         }
     }
 }
 
 
-//evaluate correct guess
+//Evaluate correct guess
 function correctGuess(userInput){
     //If the correct pressed key has NOT been added to the answerArray, add it.
     if (answerArray.indexOf(userInput) < 0){
@@ -113,18 +123,38 @@ function correctGuess(userInput){
             updateDisplay();
             remainingLetters--; //check for win
             if (remainingLetters === 0){
-                //User wins, game is finished
-                winCount++;
-                document.querySelector("#youwin-image").style.display = "block";
-                document.querySelector("#pressKeyTryAgain").style.display = "block";
-                gameFinished = true;
-                updateDisplay();
-            }
-        }
-    }
+                
+                if (selectableSongs[0] === currentSongIndex){
+            document.querySelector("#iSwear").style.display = "block";
+            document.querySelector("#iSwear").play();
+                } else if (selectableSongs[1] === currentSongIndex){
+            document.querySelector("#pokerFace").style.display = "block";
+            document.querySelector("#pokerFace").play();
+                } else if (selectableSongs[2] === currentSongIndex){
+            document.querySelector("boomPow").style.display = "block";
+            document.querySelector("boomPow").play();
+                } else if (selectableSongs[3] === currentSongIndex){
+            document.querySelector("#putItDown").style.display = "block";
+            document.querySelector("#putItDown").play();
+                } else if (selectableSongs[4] === currentSongIndex){
+            document.querySelector("#try").style.display = "block";
+            document.querySelector("#try").play();
+                } else if (selectableSongs[5] === currentSongIndex){
+            document.querySelector("#wrestler").style.display = "block";
+            document.querySelector("#wrestler").play();
+                } else {
+            document.querySelector("#bullying").style.display = "block";
+            document.querySelector("#bullying").play();
+                }
+
+    winCount++;
+    updateDisplay();
+    document.querySelector("#pressKeyTryAgain").style.display = "block";
+    gameFinished = true;
+}
 }   
+    }
+}
 }
 
-
-
-
+//Play video that matches the index song after user wins

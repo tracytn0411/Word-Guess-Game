@@ -8,14 +8,17 @@ body {
 }
 .container { 
     text-align: center;
-    
+}
+
+section {
+    width: 70%;
 }
 
 h2, h4 {
     padding: 5px;
     background-color: rgba(101,155,242,.2);
 }
-#title-image, #gameover-image, #youwin-image{ 
+#title-image, #gameover-image, #youwin-image { 
     display: block;
     margin: 0 auto;
 }
@@ -34,4 +37,8 @@ h2, h4 {
     margin-top: 20px;
     min-height: 500px;
     background-color: rgba(255, 255, 255, .3);
+}
+
+footer {
+    height: 10px;
 }
