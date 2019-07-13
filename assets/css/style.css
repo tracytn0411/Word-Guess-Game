@@ -3,8 +3,8 @@ body {
     font-family: Courier New, Courier, monospace;
     color: white;
     text-shadow: 0 0 2px black, -1px -1px 2px black, 1px 0 2px black, 1px 1px 2px black;
-    background-image: url('../images/SP\ dark\ theme.jpg');
-    background-size: contain;
+    background-image: url('../images/background2.jpg');
+    background-size: cover;
 }
 .container { 
     text-align: center;
@@ -16,13 +16,19 @@ section {
 
 h2 {
     padding: 5px;
-    background-color: rgba(101,155,242,.2);
 }
 
-h4 {margin-top: 40px;
+h4 {
+    margin-top: 40px;
 }
-.songList, .pressKey {
-    margin-top: 10%;
+
+.score p {
+    color: rgb(35, 236, 9);
+    font-size: 1.4rem;
+}
+
+.songList, .pressKey, .score {
+    margin-top: 3rem;
     width: 100%;
 }
 
@@ -34,13 +40,14 @@ h4 {margin-top: 40px;
 #pressKeyTryAgain, 
 #gameover-image, 
 #youwin-image { display: none;}
+
 .gameplay-column {
     padding-top: 20px;
     border: 3px dashed #fff;
     text-align: center;
     margin-top: 20px;
     min-height: 500px;
-    background-color: rgba(255, 255, 255, .3);
+    background-color: rgba(8, 9, 19, 0.8);
 }
 
 footer {

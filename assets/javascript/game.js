@@ -35,6 +35,10 @@ function reset() {
     }
     //Keep track of how many letters left to guess --> //|| Check for win
     remainingLetters = currentSongIndex.length; 
+
+
+    //Display welcome to ask the user to play
+    document.querySelector("#welcome").style.display = "block";
     
     //Hide gameover and win image
     document.querySelector("#gameover-image").style.display = "none";
@@ -51,7 +55,7 @@ function reset() {
  
     //Stop all videos from playing with currentTime and pause()
     //!There should be a better way to do this
-    document.querySelector("#iswear").currentTime = 0; 
+    document.querySelector("#iSwear").currentTime = 0; 
     document.querySelector("#pokerFace").currentTime = 0; 
     document.querySelector("#boomPow").currentTime = 0; 
     document.querySelector("#putItDown").currentTime = 0; 
@@ -59,7 +63,7 @@ function reset() {
     document.querySelector("#wrestler").currentTime = 0; 
     document.querySelector("#bullying").currentTime = 0; 
 
-        document.querySelector("#iswear").pause(); 
+        document.querySelector("#iSwear").pause(); 
         document.querySelector("#pokerFace").pause(); 
         document.querySelector("#boomPow").pause(); 
         document.querySelector("#putItDown").pause(); 
@@ -113,7 +117,7 @@ function incorrectGuess(userInput){
             //If guessLeft is 0, user loses, game is finished
             document.querySelector("#gameover-image").style.display = "block";
             document.querySelector("#pressKeyTryAgain").style.display = "block";
-            
+            document.querySelector("#welcome").style.display = "none";
 
             gameFinished = true;
         }
@@ -158,6 +162,7 @@ function correctGuess(userInput){
     winCount++;
     updateDisplay();
     document.querySelector("#pressKeyTryAgain").style.display = "block";
+    document.querySelector("#welcome").style.display = "none";
     gameFinished = true;
 }
 }   
