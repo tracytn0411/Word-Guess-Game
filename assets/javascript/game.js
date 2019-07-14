@@ -1,23 +1,29 @@
 var selectableSongs = [
-    "iswear", 
+    "i swear", 
     "pokerface",
-    "boomboompow", 
-    "putitdown",
+    "boom pow", 
+    "put it down",
     "try",  
     "wrestler", 
     "bullying", 
-        ];
-            
-var winCount = 0;
-var guessLeft = 9; //Check for lose
+];
+
+var alphabetArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+
 var currentSongIndex; //Index of current song in selectableSongs list
+var noSpace; //Remove all whitespace 
+
 var guessedLetters = [];
 var answerArray = []; //Song user is trying to guess (to match current song index)
 var remainingLetters; //Keep track of how many letters left to be guess --> //|| Check for win
 
+var winCount = 0;
+var guessLeft = 9; //Check for lose
 var gameFinished = false; //flag to 'press any key to start again!'
 
+
 reset();
+
 
 //Function to set variables when start/restart the game
 function reset() {
@@ -28,14 +34,21 @@ function reset() {
     currentSongIndex = selectableSongs[Math.floor(Math.random()*selectableSongs.length)];
     console.log("Current song to guess: " + currentSongIndex);
 
-    //Create an empty array and fill with "_" to match the numbers of letters in the song
+    //Create an empty array and fill with "_" to match the numbers of letters in the song, exclude whitespaces
     answerArray = [];
     for (var i=0; i<currentSongIndex.length; i++){
+        if (currentSongIndex[i] === " "){
+            answerArray[i] = "\xa0"; //display whitespace on html
+        }else{
             answerArray[i] = "_ "; //add space after underscore to separate the letters on display
+        }
     }
-    //Keep track of how many letters left to guess --> //|| Check for win
-    remainingLetters = currentSongIndex.length; 
 
+    //Keep track of how many letters left to guess --> //|| Check for win
+        //First remove all whitespace so it't not included in the answerArray
+    noSpace = currentSongIndex.replace(/\s+/g, '');
+    remainingLetters = noSpace.length; 
+    console.log("# letters remaining: " + remainingLetters);
 
     //Display welcome to ask the user to play
     document.querySelector("#welcome").style.display = "block";
@@ -95,15 +108,19 @@ document.onkeyup = function(event) {
         reset();
         gameFinished = false;
     }else{
-        if (currentSongIndex.indexOf(userInput) > -1) {
-            //If user's pressed key is in the song, run correctGuess function
-            correctGuess(userInput);
-        }else{
-            //If user's pressed key is NOT in the song, run incorrectGuess function
-            incorrectGuess(userInput);
+        //Check if userInput is alphabets (other keys don't count)
+        if (alphabetArray.indexOf(userInput) > -1) {
+            if (currentSongIndex.indexOf(userInput) > -1) {
+                //If user's pressed key is in the song, run correctGuess function
+                correctGuess(userInput);
+            }else{
+                //If user's pressed key is NOT in the song, run incorrectGuess function
+                incorrectGuess(userInput);
+            }
         }
     }
 }
+
 
 //Evaluate the incorrectGuess
 function incorrectGuess(userInput){
