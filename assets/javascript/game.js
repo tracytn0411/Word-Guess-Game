@@ -1,7 +1,7 @@
 var selectableSongs = [
     "i swear", 
     "pokerface",
-    "boom pow", 
+    "boom boom pow", 
     "put it down",
     "try",  
     "wrestler", 
