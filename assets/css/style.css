@@ -14,6 +14,10 @@ main {
 h4 {
     margin-top: 0.5rem;
 }
+video {
+    padding: 0;
+    margin: 0;
+}
 .score p {
     color: rgb(35, 236, 9);
     margin-bottom: 1.5rem;
@@ -47,6 +51,20 @@ h4 {
     main {
         margin-top: 2rem;
     }
- }
+}
 
+@media (min-width: 768px) and (max-width: 991.98px) {
+   h4 {
+       font-size: 1.2rem;
+   }
+}
+
+@media (min-width: 992px) {
+    h4 {
+        font-size: 1.6rem;
+    }
+    p {
+        font-size: 1.4rem;
+    }
+}
 

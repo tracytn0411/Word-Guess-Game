@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -8,16 +9,17 @@
 
   <!--Bootstrap 4-->
   <link rel="stylesheet" href="assets/css/reboot.css">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="assets/css/style.css">
 
 </head>
 
-<body class="d-flex flex-column h-100 justify-content-center">
-  <main class="container text-center py-md-4 px-md-2">
-    <div class="row align-items-center">
+<body class="d-flex flex-column h-100">
+  <main class="container-fluid text-center">
+    <div class="row align-items-center justify-content-center">
 
-      <section class="col-md-5 gameplay-column p-md-3">
+      <section class="col-md-4 gameplay-column p-md-3">
         <article class="score">
           <h4>WINS</h4>
           <p class="totalWins"></p>
@@ -27,39 +29,45 @@
 
           <h4># GUESSES</h4>
           <p class="remainingGuesses">9</p>
-          
+
           <h4>GUESSED LETTERS</h4>
           <p class="guessedLetters"></p>
         </article>
       </section>
 
-      <section class="col-md-7 p-1 gameplay-column">
-        <section class="card">
-          <article class="songList">
-            <img id="gameover-image" class="card-img-top" src="assets/images/SP Crying.gif" alt="Game Over Image"/>
-            
-            <video id="iSwear" class="card-img-top" src="assets/images/I Swear.mp4"></video>
-            <video id="pokerFace" class="card-img-top" src="assets/images/Poker Face.mp4"></video>
-            <video id="boomPow" class="card-img-top" src="assets/images/Butters - Boom Boom Pow cover HD.mp4"></video>
-            <video id="putItDown" class="card-img-top" src="assets/images/Put It Down.mp4"></video>
-            <video id="try" class="card-img-top" src="assets/images/Give LIfe a Try.mp4"></video>
-            <video id="wrestler" class="card-img-top" src="assets/images/Wrestler.mp4"></video>
-            <video id="bullying" class="card-img-top" src="assets/images/Bullying.mp4"></video>
-          </article>
-  
-          <article class="card-body p-md-2 p-sm-1 bg-secondary pressKey">
-            <h4 id="pressKeyTryAgain">PRESS ANY KEY TO TRY AGAIN!</h4>
-            <h4 id="welcome" class="mb-0">GUESS A SONG IN SOUTH PARK!</h4>
+      <section class="col-md-6 gameplay-column m-lg-4 p-lg-4">
+        <section class="card bg-info songList">
+          <img id="gameover-image" class="card-img-top p-0 m-0" src="assets/images/SP Crying.gif" alt="Game Over Image" />
+
+          <video id="iSwear" class="card-img-top" src="assets/images/I Swear.mp4"></video>
+          <video id="pokerFace" class="card-img-top" src="assets/images/Poker Face.mp4"></video>
+          <video id="boomPow" class="card-img-top" src="assets/images/Butters - Boom Boom Pow cover HD.mp4"></video>
+          <video id="putItDown" class="card-img-top" src="assets/images/Put It Down.mp4"></video>
+          <video id="try" class="card-img-top" src="assets/images/Give LIfe a Try.mp4"></video>
+          <video id="wrestler" class="card-img-top" src="assets/images/Wrestler.mp4"></video>
+          <video id="bullying" class="card-img-top" src="assets/images/Bullying.mp4"></video>
+
+
+          <article class="card-body m-1 bg-secondary pressKey">
+            <h4 class="card-text" id="pressKeyTryAgain">PRESS ANY KEY TO TRY AGAIN!</h4>
+            <h4 class="card-text" id="welcome" >GUESS A SONG IN SOUTH PARK!</h4>
           </article>
         </section>
       </section>
     </div>
   </main>
 
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+  </script>
 
   <script type="text/javascript" src="assets/javascript/game.js"></script>
 </body>
+
 </html>
